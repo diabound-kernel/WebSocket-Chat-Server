@@ -4,6 +4,7 @@
 #include <boost/beast.hpp>
 
 #include <iostream>
+#include <string_view>
 #include <vector>
 
 template<typename ServerState>
@@ -105,7 +106,7 @@ private:
         }
     }
 
-    void fail(boost::system::error_code error, const char *where)
+    void fail(boost::system::error_code error, std::string_view where)
     {
         if (error == boost::asio::error::operation_aborted) {
             return;

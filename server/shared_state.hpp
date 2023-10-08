@@ -21,7 +21,7 @@ public:
         sessions_.erase(&session);
     }
 
-    void send(std::string message)
+    void send(const std::string &message)
     {
         auto message_ = std::make_shared<std::string>(std::move(message));
 

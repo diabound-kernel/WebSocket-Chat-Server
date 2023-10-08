@@ -6,6 +6,7 @@
 #include <boost/beast.hpp>
 
 #include <iostream>
+#include <string_view>
 
 class HttpSession : public std::enable_shared_from_this<HttpSession>
 {
@@ -51,7 +52,7 @@ private:
         }
     }
 
-    void fail(boost::system::error_code error, const char *where)
+    void fail(boost::system::error_code error, std::string_view where)
     {
         if (error == boost::asio::error::operation_aborted) {
             return;
