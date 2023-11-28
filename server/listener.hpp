@@ -1,11 +1,9 @@
 #pragma once
 
+#include "fail.hpp"
 #include "http_session.hpp"
 
 #include <boost/asio.hpp>
-
-#include <iostream>
-#include <string_view>
 
 class Listener : public std::enable_shared_from_this<Listener>
 {
@@ -74,15 +72,6 @@ private:
             [self = this->shared_from_this()](boost::system::error_code error) {
                 self->onAccept(error);
             });
-    }
-
-    void fail(boost::system::error_code error, std::string_view where)
-    {
-        if (error == boost::asio::error::operation_aborted) {
-            return;
-        }
-
-        std::cout << where << ": " << error.message() << std::endl;
     }
 
     boost::asio::ip::tcp::acceptor acceptor_;

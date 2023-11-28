@@ -1,12 +1,10 @@
 #pragma once
 
+#include "fail.hpp"
 #include "shared_state.hpp"
 #include "web_socket_session.hpp"
 
 #include <boost/beast.hpp>
-
-#include <iostream>
-#include <string_view>
 
 class HttpSession : public std::enable_shared_from_this<HttpSession>
 {
@@ -50,15 +48,6 @@ private:
                 ->run(req_);
             return;
         }
-    }
-
-    void fail(boost::system::error_code error, std::string_view where)
-    {
-        if (error == boost::asio::error::operation_aborted) {
-            return;
-        }
-
-        std::cout << where << ": " << error.message() << std::endl;
     }
 
     boost::asio::ip::tcp::socket socket_;

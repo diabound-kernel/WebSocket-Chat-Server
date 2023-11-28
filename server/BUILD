@@ -22,6 +22,7 @@ cc_binary(
         "listener.hpp",
         "shared_state.hpp",
         "web_socket_session.hpp",
+        "fail.hpp",
     ],
     deps = [
         "lib-boost",

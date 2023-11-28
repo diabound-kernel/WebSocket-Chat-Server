@@ -4,9 +4,9 @@
 
 int main(int argc, const char *argv[])
 {
-    auto address = boost::asio::ip::make_address(argv[1]);
+    const auto address = boost::asio::ip::make_address(argv[1]);
 
-    auto port = static_cast<unsigned int>(std::atoi(argv[2]));
+    const auto port = static_cast<unsigned int>(std::atoi(argv[2]));
 
     boost::asio::io_context ioContext;
 

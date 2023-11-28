@@ -26,7 +26,7 @@ public:
         auto message_ = std::make_shared<std::string>(std::move(message));
 
         std::ranges::for_each(
-            sessions_, [&](auto session) { session->send(message_); });
+            sessions_, [&](const auto &session) { session->send(message_); });
     }
 
 private:
