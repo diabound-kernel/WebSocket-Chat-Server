@@ -7,6 +7,12 @@
 #include <string_view>
 #include <vector>
 
+enum Buffer
+{
+    Empty,
+    AlreadyWriting,
+};
+
 template<typename ServerState>
 class WebSocketSession
     : public std::enable_shared_from_this<WebSocketSession<ServerState>>
@@ -36,11 +42,11 @@ public:
 
     void send(std::shared_ptr<std::string> message)
     {
-        messages_.push_back(message);
-
-        if (messages_.size() > 1) {
+        if (messages_.size() == Buffer::AlreadyWriting) {
             return;
         }
+
+        messages_.push_back(message);
 
         ws_.async_write(
             boost::asio::buffer(*messages_.front()),
