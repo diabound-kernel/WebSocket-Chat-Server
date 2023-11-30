@@ -23,8 +23,10 @@ cc_binary(
         "shared_state.hpp",
         "web_socket_session.hpp",
         "fail.hpp",
+        "cli.hpp"
     ],
     deps = [
         "lib-boost",
+        "//third_party/cli11",
     ],
 )
