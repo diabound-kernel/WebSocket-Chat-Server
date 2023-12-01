@@ -1,9 +1,13 @@
 # WebSocket-Chat-Server
 
-Default usage:
+Default build:
 
-      bazel run //server:server <address> <port>
+      bazel build //server:server 
       
 With a custom compiler:
       
-      CC=<compiler-binary> bazel run //server:server <address> <port>
+      CC=<compiler-binary> bazel build //server:server
+
+Run:
+
+      ./bazel-bin/server/server --address=<address> --port=<port>
