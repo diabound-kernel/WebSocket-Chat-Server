@@ -1,6 +1,6 @@
 #pragma once
 
-#include "fail.hpp"
+#include "log.hpp"
 #include "shared_state.hpp"
 #include "web_socket_session.hpp"
 
@@ -38,7 +38,7 @@ private:
         }
 
         if (error) {
-            fail(error, "Http onRead");
+            fail("Http onRead:", error);
             return;
         }
 

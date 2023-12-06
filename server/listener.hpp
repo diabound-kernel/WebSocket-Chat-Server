@@ -1,7 +1,7 @@
 #pragma once
 
-#include "fail.hpp"
 #include "http_session.hpp"
+#include "log.hpp"
 
 #include <boost/asio.hpp>
 
@@ -17,25 +17,24 @@ public:
         state_(state)
     {
         boost::system::error_code error;
-
         acceptor_.open(endpoint.protocol(), error);
 
         if (error) {
-            fail(error, "Listener open");
+            fail("Listener open:", error);
             return;
         }
 
         acceptor_.set_option(boost::asio::socket_base::reuse_address(true));
 
         if (error) {
-            fail(error, "Listener setOption");
+            fail("Listener setOption:", error);
             return;
         }
 
         acceptor_.bind(endpoint, error);
 
         if (error) {
-            fail(error, "Listener bind");
+            fail("Listener bind:", error);
             return;
         }
 
@@ -43,9 +42,11 @@ public:
             boost::asio::socket_base::max_listen_connections, error);
 
         if (error) {
-            fail(error, "Listener listen");
+            fail("Listener listen:", error);
             return;
         }
+
+        info("Server listening on port:", endpoint.port());
     }
 
     void run()
@@ -61,7 +62,7 @@ private:
     void onAccept(boost::system::error_code error)
     {
         if (error) {
-            fail(error, "Listener onAccept");
+            fail("Listener onAccept:", error);
         }
         else {
             std::make_shared<HttpSession>(std::move(socket_), state_)->run();

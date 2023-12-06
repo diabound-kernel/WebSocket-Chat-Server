@@ -22,7 +22,7 @@ cc_binary(
         "listener.hpp",
         "shared_state.hpp",
         "web_socket_session.hpp",
-        "fail.hpp",
+        "log.hpp",
         "cli.hpp"
     ],
     deps = [

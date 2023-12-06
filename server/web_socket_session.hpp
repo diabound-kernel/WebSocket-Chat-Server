@@ -1,6 +1,6 @@
 #pragma once
 
-#include "fail.hpp"
+#include "log.hpp"
 
 #include <boost/asio.hpp>
 #include <boost/beast.hpp>
@@ -60,7 +60,7 @@ private:
     void onAccept(boost::system::error_code error)
     {
         if (error) {
-            fail(error, "WebSocket onAccept");
+            fail("WebSocket onAccept:", error);
             return;
         }
 
@@ -77,7 +77,7 @@ private:
     void onRead(boost::system::error_code error, std::size_t)
     {
         if (error) {
-            fail(error, "WebSocket onRead");
+            fail("WebSocket onRead:", error);
             return;
         }
 
@@ -96,7 +96,7 @@ private:
     void onWrite(boost::system::error_code error, std::size_t)
     {
         if (error) {
-            fail(error, "WebSocket onWritte");
+            fail("WebSocket onWrite:", error);
             return;
         }
 
